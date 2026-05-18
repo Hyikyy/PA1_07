@@ -20,11 +20,11 @@
 /* Global Colors - The following color variables are used throughout the website. Updating them here will change the color scheme of the entire website */
 :root {
   --background-color: #ffffff; /* Background color for the entire website, including individual sections */
-  --default-color: #222222; /* Default color used for the majority of the text content across the entire website */
-  --heading-color: #172a28; /* Color for headings, subheadings and title throughout the website */
+  --default-color: #000; /* Default color used for the majority of the text content across the entire website */
+  --heading-color: #ffffff; /* Color for headings, subheadings and title throughout the website */
   --accent-color: #008374; /* Accent color that represents your brand on the website. It's used for buttons, links, and other elements that need to stand out */
   --surface-color: #ffffff; /* The surface color is used as a background of boxed elements within sections, such as cards, icon boxes, or other elements that require a visual separation from the global background. */
-  --contrast-color: #ffffff; /* Contrast color for text, ensuring readability against backgrounds of accent, heading, or default colors. */
+  --contrast-color: #000; /* Contrast color for text, ensuring readability against backgrounds of accent, heading, or default colors. */
 }
 
 /* Nav Menu Colors - The following color variables are used specifically for the navigation menu. They are separate from the global colors to allow for more customization options */
@@ -45,15 +45,15 @@
 }
 
 .dark-background {
-  --background-color: #060606;
-  --default-color: #ffffff;
+  --background-color: #414544;
+  --default-color: #000;
   --heading-color: #ffffff;
   --surface-color: #252525;
   --contrast-color: #ffffff;
 }
 
 .accent-background {
-  --background-color: #484444;
+  --background-color: #414544;
   --default-color: #ffffff;
   --heading-color: #ffffff;
   --accent-color: #ffffff;
@@ -3082,3 +3082,193 @@ section,
     background-color: #ccffcc; /* Warna berbeda untuk hari dengan event */
     font-weight: bold;
 }
+
+/* Gaya untuk memastikan ukuran card tetap konsisten */
+.member {
+  text-align: center;
+  border: 1px solid #eee;
+  padding: 15px;
+  border-radius: 5px;
+}
+
+.member-img {
+  width: 100%;
+  height: 250px; /* Sesuaikan tinggi ini sesuai kebutuhan Anda */
+  overflow: hidden; /* Penting untuk memotong gambar yang keluar batas */
+  margin-bottom: 15px;
+}
+
+.member-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Ini akan memotong gambar jika perlu agar sesuai */
+  display: block;
+}
+
+.member h4 {
+  margin-bottom: 5px;
+  font-size: 18px;
+}
+
+.member span {
+  font-style: italic;
+  color: #777;
+}
+
+.member p {
+  margin-top: 10px;
+  font-size: 14px;
+}
+
+.member .btn {
+  margin-top: 15px;
+}
+
+/*apa kata alumni*/
+<style>
+    /* Style Card Utama */
+    .alumni-card {
+        border: 1px solid #000;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        overflow: hidden;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        width: 450px; /* Lebar card diperbesar */
+        margin: 20px auto;
+        background-color: #fff;
+        display: flex; /* Menggunakan flexbox */
+    }
+
+    .alumni-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Style Gambar Lingkaran */
+    .alumni-card .image-container {
+        width: 200px;
+        height: 200px;
+        border-radius: 50%;
+        overflow: hidden;
+        margin: 20px;
+        border: 4px solid #ddd;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        flex-shrink: 0; /* Agar tidak menyusut */
+    }
+
+    .alumni-card .image-container img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+        transition: transform 15s linear; /* Rotasi slow motion */
+    }
+
+    .alumni-card:hover .image-container img {
+        transform: rotate(360deg);
+    }
+
+    /* Style Info */
+    .alumni-card-info {
+        padding: 20px;
+        background-color: #f9f9f9;
+        text-align: left; /* Teks rata kiri */
+        flex-grow: 1; /* Mengisi sisa ruang */
+        display: flex;
+        flex-direction: column;
+        justify-content: center; /* Pusatkan konten vertikal */
+    }
+
+    .alumni-card-info h3 {
+        font-size: 24px;
+        font-weight: bold;
+        margin-bottom: 8px;
+        color: #333;
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+        border: none; /* Hilangkan border pada nama */
+        padding: 0; /* Hilangkan padding pada nama */
+        display: block; /* Kembalikan ke block */
+    }
+
+    .alumni-card-info h4 {
+        font-size: 16px;
+        color: #fff;
+        margin-bottom: 15px;
+        border: none; /* Hilangkan border pada angkatan */
+        padding: 0; /* Hilangkan padding pada angkatan */
+        display: block; /* Kembalikan ke block */
+    }
+
+    .alumni-card-info p {
+        font-size: 15px;
+        line-height: 1.6;
+        color: #555;
+        margin-bottom: 10px;
+    }
+
+    .alumni-card-info p b {
+        font-weight: bold;
+        color: #333;
+    }
+
+    /* Style Tombol */
+    .alumni-card-info .btn-primary {
+        background-color: #007bff;
+        color: #fff;
+        text-decoration: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        display: inline-block;
+        transition: background-color 0.3s ease;
+        border: none;
+    }
+
+    .alumni-card-info .btn-primary:hover {
+        background-color: #0056b3;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Tambahkan margin atas pada section utama */
+    #alumni-details {
+        margin-top: 50px;
+    }
+
+     /* Responsive design */
+     @media (max-width: 768px) {
+        .alumni-card {
+            width: 90%; /* Lebar responsif */
+            flex-direction: column; /* Tumpuk vertikal */
+            align-items: center; /* Tengahkan konten */
+        }
+
+        .alumni-card .image-container {
+            width: 150px;
+            height: 150px;
+            margin: 20px auto; /* Tengahkan gambar */
+        }
+
+        .alumni-card-info {
+            padding: 15px;
+            text-align: center; /* Teks rata tengah */
+        }
+
+        .alumni-card-info h3 {
+            font-size: 22px;
+        }
+
+        .alumni-card-info h4 {
+            font-size: 15px;
+        }
+
+        .alumni-card-info p {
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .alumni-card-info .btn-primary {
+            font-size: 13px;
+            padding: 8px 16px;
+        }
+    }
+
+</style>

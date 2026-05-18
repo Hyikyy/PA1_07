@@ -7,21 +7,7 @@
 @section('content')
 
 <main id="main">
-
-    <!-- ======= Breadcrumbs ======= -->
-    <div class="breadcrumbs">
-        <div class="container">
-            <div class="d-flex justify-content-between align-items-center">
-                <h2>Detail Berita</h2>
-                <ol>
-                    <li><a href="{{ route('welcome') }}">Beranda</a></li>
-                    <li><a href="{{ route('beritas.public') }}">Berita</a></li>
-                    <li>Detail</li>
-                </ol>
-            </div>
-        </div>
-    </div><!-- End Breadcrumbs -->
-
+<br><br><br>
     <!-- ======= Berita Detail Section ======= -->
     <section id="berita-detail" class="blog-details">
         <div class="container" data-aos="fade-up">
@@ -57,16 +43,16 @@
                         </div>
 
                     </article><!-- End Blog Entry -->
-
+                <br><br><br>
                     {{-- Daftar Feedback --}}
                     <div class="feedback-list">
-                        <h3 class="section-title">Feedback</h3>
+                        <h3 class="section-title fw-bold" style="color: black;">Feedback</h3>
 
                         @if ($berita->feedback->count() > 0)
                             @foreach ($berita->feedback as $feedback)
                                 <div class="feedback-item">
-                                    <h4>{{ $feedback->user ? $feedback->user->name : $feedback->nama }}</h4>
-                                    <time datetime="{{ $feedback->tanggal }}">{{ \Carbon\Carbon::parse($feedback->tanggal)->format('d F Y, H:i') }}</time>
+                                    <h4 style="color: black;">{{ $feedback->user ? $feedback->user->name : $feedback->nama }}</h4>
+                                    <time datetime="{{ $feedback->tanggal }}">{{ \Carbon\Carbon::parse($feedback->tanggal)->format('d F Y') }}</time>
                                     <p>{{ $feedback->isi }}</p>
 
                                     @auth
@@ -94,7 +80,7 @@
 
                         @if (!$userHasFeedback)
                             <div class="feedback-form">
-                                <h3 class="section-title">Berikan Feedback</h3>
+                                <h3 class="section-title fw-bold" style="color: black;">Berikan Feedback</h3>
 
                                 @if(session('success'))
                                     <div class="alert alert-success">
@@ -115,13 +101,6 @@
                             <form action="{{ route('feedback.store') }}" method="POST">
                                 @csrf
                                 <input type="hidden" name="berita_id" value="{{ $berita->id }}">
-                                 <input type="hidden" name="nama" value="{{ Auth::user()->name }}">
-
-                                <div class="mb-3">
-                                    <label for="tanggal">Tanggal *</label>
-                                    <input type="datetime-local" name="tanggal" id="tanggal" class="form-control" value="{{ old('tanggal', \Carbon\Carbon::now()->format('Y-m-d\TH:i')) }}" required>
-                                    <small class="text-muted">Format: YYYY-MM-DD HH:MM</small>
-                                </div>
 
                                 <div class="mb-3">
                                     <label for="isi">Feedback *</label>
@@ -150,7 +129,7 @@
                             - Search Form
                         --}}
                         <div class="sidebar-item recent-posts">
-                            <h3 class="sidebar-title">Berita Terbaru</h3>
+                            <h3 class="sidebar-title fw-bold" style="color: black;">Berita Terbaru</h3>
                             <div class="mt-3">
                                 @foreach ($recentBeritas as $recentBerita)
                                 <div class="post-item clearfix">

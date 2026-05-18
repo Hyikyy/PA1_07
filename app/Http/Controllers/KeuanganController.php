@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Keuangan;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class KeuanganController extends Controller
 {
@@ -11,8 +12,21 @@ class KeuanganController extends Controller
     {
         $totalPemasukan = Keuangan::sum('pemasukan');
         $totalPengeluaran = Keuangan::sum('pengeluaran');
+        $totalSaldo = Keuangan::sum('saldo'); // Ambil total saldo dari database
 
-        return view('keuangan.index', compact('totalPemasukan', 'totalPengeluaran'));
+        // Ambil ringkasan bulanan
+        $ringkasanBulanan = Keuangan::select(
+            DB::raw("DATE_FORMAT(created_at, '%M') as bulan"),
+            DB::raw('SUM(pemasukan) as total_pemasukan'),
+            DB::raw('SUM(pengeluaran) as total_pengeluaran')
+        )
+            ->groupBy('bulan')
+            ->orderBy(DB::raw("STR_TO_DATE(bulan, '%M')"))
+            ->get()
+            ->keyBy('bulan')
+            ->toArray();
+        
+        return view('keuangan.index', compact('totalPemasukan', 'totalPengeluaran', 'ringkasanBulanan', 'totalSaldo')); // Kirim totalSaldo ke view
     }
 
     public function index()
@@ -27,29 +41,28 @@ class KeuanganController extends Controller
     }
 
     public function store(Request $request)
-{
-    // Validasi data
-    $request->validate([
-        'pemasukan' => 'required|numeric',
-        'pengeluaran' => 'required|numeric',
-        'saldo' => 'required|numeric',
-        'laporan' => 'nullable|string',
-    ]);
+    {
+        // Validasi data
+        $request->validate([
+            'pemasukan' => 'required|numeric',
+            'pengeluaran' => 'required|numeric',
+            'saldo' => 'required|numeric',
+            'laporan' => 'nullable|string',
+        ]);
 
-    // Ambil semua data yang diterima dari request
-    $data = $request->all();
+        // Ambil semua data yang diterima dari request
+        $data = $request->all();
 
-    // Menambahkan user_id berdasarkan user yang sedang login
-    $data['user_id'] = auth()->user()->id;
+        // Menambahkan user_id berdasarkan user yang sedang login
+        $data['user_id'] = auth()->user()->id;
 
-    // Simpan data ke tabel 'keuangan'
-    Keuangan::create($data);
+        // Simpan data ke tabel 'keuangan'
+        Keuangan::create($data);
 
-    // Redirect dengan pesan sukses
-    return redirect()->route('admin.keuangan.index')
-        ->with('success', 'Data keuangan berhasil ditambahkan.');
-}
-
+        // Redirect dengan pesan sukses
+        return redirect()->route('admin.keuangan.index')
+            ->with('success', 'Data keuangan berhasil ditambahkan.');
+    }
 
     public function show(Keuangan $keuangan)
     {

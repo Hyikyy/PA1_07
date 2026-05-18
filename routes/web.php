@@ -14,7 +14,6 @@ use App\Http\Controllers\TeachingAssistantController; // Tambahkan ini
 use App\Http\Controllers\AlumniController; // Tambahkan ini
 use App\Http\Controllers\ApaKataAlumniController;
 use App\Http\Controllers\KeuanganController;
-use App\Http\Controllers\GuestController;
 
 
 
@@ -29,35 +28,13 @@ use App\Http\Controllers\GuestController;
 */
 
 // Authentication Routes (Guest Only)
-Route::group(['middleware' => 'guest'], function () {
     Route::get('/login', [AuthController::class, 'showLoginForm'])->name('showLogin');
     Route::post('/login', [AuthController::class, 'login'])->name('login');
 
     Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('showRegister');
     Route::post('/register', [AuthController::class, 'register'])->name('register');
-});
 
-//Route utama dialihkan ke login jika belum login
-// Route::get('/', function () {
-//     return redirect()->route('showLogin');
-// });
-
-Route::get('/', [GuestController::class, 'index']);
-
-
-Route::get('/feedback/{feedback}/edit', [FeedbackController::class, 'edit'])->name('feedback.edit')->middleware('auth');
-Route::put('/feedback/{feedback}', [FeedbackController::class, 'update'])->name('feedback.update')->middleware('auth');
-Route::delete('/feedback/{feedback}', [FeedbackController::class, 'destroy'])->name('feedback.destroy')->middleware('auth');
-
-// Protected Routes (Authenticated Users Only)
-Route::group(['middleware' => 'auth'], function () {
-
-    Route::post('/feedback', [FeedbackController::class, 'store'])->name('feedback.store');
-
-    Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
-
-    // Halaman utama (Public)
-    Route::get('/welcome', [WelcomeController::class, 'index'])->name('welcome');
+    Route::get('/', [WelcomeController::class, 'index'])->name('welcome');
 
     // Struktur Organisasi Routes (Public)
     Route::get('/struktur-organisasi', [StrukturOrganisasiController::class, 'showPublic'])->name('struktur-organisasi.public');
@@ -87,9 +64,31 @@ Route::group(['middleware' => 'auth'], function () {
 
     // Apa kata alumni
     Route::get('/apa-kata-alumni', [ApaKataAlumniController::class, 'indexPublic'])->name('apa_kata_alumni.index');
-
+    Route::get('/apa-kata-alumni/{id}', [ApaKataAlumniController::class, 'showPublic'])->name('apa_kata_alumni.show');
     // Keuangan
     Route::get('/keuangan', [KeuanganController::class, 'indexPublic'])->name('keuangan.index');
+
+    // Detail 
+    Route::get('/dosen/{id}', [DosenController::class, 'showDetail'])->name('dosen.show');
+    Route::get('/asisten/{id}', [DosenController::class, 'showDetail'])->name('asisten.show');
+    Route::get('/alumni/{id}', [DosenController::class, 'showDetail'])->name('alumni.show');
+
+
+//Route utama dialihkan ke login jika belum login
+
+
+
+Route::get('/feedback/{feedback}/edit', [FeedbackController::class, 'edit'])->name('feedback.edit')->middleware('auth');
+Route::put('/feedback/{feedback}', [FeedbackController::class, 'update'])->name('feedback.update')->middleware('auth');
+Route::delete('/feedback/{feedback}', [FeedbackController::class, 'destroy'])->name('feedback.destroy')->middleware('auth');
+
+// Protected Routes (Authenticated Users Only)
+Route::group(['middleware' => 'auth'], function () {
+
+    Route::post('/feedback', [FeedbackController::class, 'store'])->name('feedback.store');
+
+    Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+});
 
 
     // Admin Routes (Authenticated Admins Only)
@@ -208,4 +207,3 @@ Route::group(['middleware' => 'auth'], function () {
             Route::delete('/{keuangan}', [KeuanganController::class, 'destroy'])->name('admin.keuangan.destroy');
         });
     });
-});

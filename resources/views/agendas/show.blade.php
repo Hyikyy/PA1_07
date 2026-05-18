@@ -28,28 +28,24 @@
 
         <div class="row">
           <div class="col-lg-8">
-            <div class="card">
-              <div class="card-body">
-                <h5 class="card-title">{{ $agenda->nama_kegiatan }}</h5>
+            <div class="card shadow-lg" style="border: 1px solid black;">  
+              <div class="card-body p-4"> 
+                <h5 class="card-title fw-bold mb-3">{{ $agenda->nama_kegiatan }}</h5> 
                 <p class="card-text">
-                  <strong>Tanggal:</strong> {{ \Carbon\Carbon::parse($agenda->tanggal_kegiatan)->isoFormat('dddd, D MMMM YYYY') }}
+                  <strong class="fw-bold">Tanggal:</strong> {{ \Carbon\Carbon::parse($agenda->tanggal_kegiatan)->isoFormat('dddd, D MMMM YYYY') }}
                 </p>
                 <p class="card-text">
-                  <strong>Waktu:</strong> {{ $agenda->waktu_kegiatan }}
+                  <strong class="fw-bold">Deskripsi:</strong> {{ $agenda->deskripsi }}
                 </p>
-                <p class="card-text">
-                  <strong>Lokasi:</strong> {{ $agenda->lokasi_kegiatan }}
-                </p>
-                <p class="card-text">{{ $agenda->deskripsi }}</p>
               </div>
-              <div class="card-footer">
+              <div class="card-footer bg-white border-top-0 p-4">  <!-- Footer putih tanpa border -->
                 <a href="{{ route('agendas.index') }}" class="btn btn-secondary">Kembali ke Daftar Agenda</a>
               </div>
             </div>
           </div>
           <div class="col-lg-4">
             <div class="sidebar">
-              <h3 class="sidebar-title">Agenda Lainnya</h3>
+              <h3 class="sidebar-title fw-bold" style="color: black;">Agenda Lainnya</h3>
               <div class="sidebar-item recent-posts">
                 <div class="mt-3">
                   @foreach(\App\Models\Agenda::orderBy('tanggal_kegiatan', 'asc')->take(5)->get() as $recentAgenda)
@@ -70,5 +66,4 @@
     </section><!-- End Agenda Details Section -->
 
   </main><!-- End #main -->
-
 @endsection

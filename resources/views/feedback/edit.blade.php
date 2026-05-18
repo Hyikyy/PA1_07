@@ -45,12 +45,6 @@
                             @method('PUT')
 
                             <div class="mb-3">
-                                <label for="tanggal">Tanggal *</label>
-                                <input type="datetime-local" name="tanggal" id="tanggal" class="form-control" value="{{ old('tanggal', \Carbon\Carbon::parse($feedback->tanggal)->format('Y-m-d\TH:i')) }}" required>
-                                <small class="text-muted">Format: YYYY-MM-DD HH:MM</small>
-                            </div>
-
-                            <div class="mb-3">
                                 <label for="isi">Feedback *</label>
                                 <textarea name="isi" id="isi" class="form-control" rows="5" required>{{ old('isi', $feedback->isi) }}</textarea>
                             </div>

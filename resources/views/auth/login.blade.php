@@ -102,6 +102,10 @@
 
             <button type="submit" class="btn btn-primary">Login</button>
         </form>
+
+        <p class="mt-3 text-center">
+            Belum punya akun? <a href="{{ route('showRegister') }}">Register di sini</a>
+        </p>
     </div>
 
     <!-- Vendor JS Files -->

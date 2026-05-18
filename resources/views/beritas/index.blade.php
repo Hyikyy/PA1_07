@@ -10,8 +10,9 @@
 
   <section class="jumbotron text-center">
     <div class="container">
-      <h1 class="jumbotron-heading">Berita HIMATIF</h1>
-      <p class="lead text-muted">Informasi terbaru mengenai kegiatan, prestasi, dan informasi penting lainnya dari Himpunan Mahasiswa Teknologi Informasi.</p>
+      <br><br><br>
+      <h1 class="jumbotron-heading fw-bold" style="color: black;">Berita HIMATIF</h1>
+      <p class="lead text-muted" style="color: black;">Informasi terbaru mengenai kegiatan, prestasi, dan informasi penting lainnya dari Himpunan Mahasiswa Teknologi Informasi.</p>
     </div>
   </section>
 
@@ -31,7 +32,7 @@
 
               <div class="card-body">
                 {{-- Judul --}}
-                <h5 class="card-title">{{ $berita->judul }}</h5>
+                <h5 class="card-title fw-bold" style="color: black;">{{ $berita->judul }}</h5>
 
                 {{-- Tanggal Upload --}}
                 <small class="text-muted">

@@ -26,21 +26,23 @@
       <div class="container" data-aos="fade-up">
 
         <div class="section-header">
-          <h2 class="text-center">Jejak Digital HIMATIF: Galeri Kegiatan Kami</h2>
+          <h2 class="text-center fw-bold" style="color: black;">Jejak Digital HIMATIF: Galeri Kegiatan Kami</h2>
           <p class="text-center">Telusuri berbagai momen berharga yang telah kami ukir dalam setiap langkah.</p>
         </div>
 
         <div class="row gy-4">
 
           @foreach($galeris as $galeri)
-            <div class="col-xl-4 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="100">
+            <div class="col-xl-4 col-md-6" data-aos="fade-up" data-aos-delay="100"> <!-- Hapus d-flex dan align-items-stretch -->
               <div class="member">
-                @if($galeri->gambar)
-                  <img src="{{ asset('storage/' . $galeri->gambar) }}" class="img-fluid" alt="{{ $galeri->judul }}">
-                @else
-                  <img src="{{ asset('assets/img/no-image.png') }}" class="img-fluid" alt="Default Image">
-                @endif
-                <h4>{{ $galeri->judul }}</h4>
+                <div class="image-container">
+                  @if($galeri->gambar)
+                    <img src="{{ asset('storage/' . $galeri->gambar) }}" class="img-fluid galeri-image" alt="{{ $galeri->judul }}">
+                  @else
+                    <img src="{{ asset('assets/img/no-image.png') }}" class="img-fluid galeri-image" alt="Default Image">
+                  @endif
+                </div>
+                <h4 style="color: black;">{{ $galeri->judul }}</h4>
               </div>
             </div><!-- End Galeri Item -->
           @endforeach
@@ -51,5 +53,48 @@
     </section><!-- End Galeri Section -->
 
   </main><!-- End #main -->
+
+  <style>
+    /* Style untuk Card foto*/
+    .member {
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      overflow: hidden; 
+      border: 1px solid #ddd; /*tampilan lebih rapi*/
+      display: flex; 
+      flex-direction: column; /* Atur elemen secara vertikal */
+      height: auto; /* tinggi menyesuaikan konten */
+    }
+
+    /* Style untuk Pembungkus Gambar */
+    .member .image-container {
+      width: 100%; 
+      display: flex; 
+      align-items: center; 
+      justify-content: center; 
+    }
+
+    /* Style untuk Gambar */
+    .member .image-container img.galeri-image {
+      max-width: 100%; /* Gambar tidak melebihi lebar container */
+      max-height: 400px; 
+      object-fit: contain; 
+      display: block; 
+    }
+
+    /* Style Judul */
+    .member h4 {
+      padding: 10px;
+      margin-top: 10px;
+      text-align: center;
+    }
+
+    /* Responsive design untuk gambar potret */
+    @media (max-width: 768px) {
+      .member .image-container img.galeri-image {
+        max-height: 300px; /* Tinggi maksimum lebih kecil di mobile */
+      }
+    }
+  </style>
 
 @endsection
